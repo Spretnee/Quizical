@@ -2,15 +2,16 @@ import React from "react";
 import Answer from "./Answer";
 
 export default function Question(props) {
-  //   console.log("Props from Question component", props);
+  // console.log("Props from Question component", props);
   const answersElement = props.answers.map((item, index) => {
     return (
       <Answer
-        handleClick={(e, isClicked) => props.handleClickAnswer(e, isClicked)}
+        handleClick={(e, id) => props.handleClickAnswer(id, e)}
         isClicked={item.isClicked}
         isCorrect={item.isCorrect}
         key={index}
         text={item.answer}
+        id={item.id}
       />
     );
   });

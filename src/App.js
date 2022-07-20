@@ -64,7 +64,7 @@ export default function App() {
   //   console.log("koji kurac", questions);
   // }
 
-  function handleClickAnswer(e, id) {
+  function handleClickAnswer(id, e) {
     setQuestions((prevQuestions) =>
       prevQuestions.map((question) => {
         return {
@@ -75,16 +75,17 @@ export default function App() {
                   id: awr.id,
                   isClicked: !awr.isClicked,
                   isCorrect: awr.isCorrect,
+                  disabled: false,
                 }
-              : awr;
+              : { ...awr, disabled: true };
           }),
           trivia: question.trivia,
         };
       })
     );
   }
+  console.log("Main data: ", questions);
 
-  console.log(questions);
   return (
     <main className="container center-flex">
       <Background />

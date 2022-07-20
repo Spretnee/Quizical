@@ -1,7 +1,8 @@
 import React from "react";
 
 export default function Answer(props) {
-  console.log("Props from Answer component", props);
+  // console.log(`Props from Answer component`, props);
+  let style;
 
   return (
     <button
@@ -9,7 +10,7 @@ export default function Answer(props) {
       onClick={(e) => {
         props.handleClick(props.id, e);
       }}
-      className={!props.isClicked ? "answer" : "answer clicked"}
+      className={!props.isClicked ? "answer" : "answer clicked "}
     >
       {props.text}
     </button>

@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 export default function App() {
   const [questions, setQuestions] = React.useState(null);
   const [quizStart, SetQuizStart] = React.useState(false);
+  const [result, setResult] = React.useState(questions);
 
   React.useEffect(() => {
     async function fetchTrivia() {
@@ -50,20 +51,6 @@ export default function App() {
     fetchTrivia().then((data) => setQuestions(data));
   }, []);
 
-  // function handleClickAnswer(e, id) {
-  //   setQuestions((prevQuestions) =>
-  //     prevQuestions.map((question, index) =>
-  //       question.answers[index].isClicked === isClicked
-  //         ? {
-  //             ...question,
-  //             answers: [...question.answers[index].answer, (isClicked = !isClicked)],
-  //           }
-  //         : question
-  //     )
-  //   );
-  //   console.log("koji kurac", questions);
-  // }
-
   function handleClickAnswer(id, e) {
     setQuestions((prevQuestions) =>
       prevQuestions.map((question) => {
@@ -75,16 +62,19 @@ export default function App() {
                   id: awr.id,
                   isClicked: !awr.isClicked,
                   isCorrect: awr.isCorrect,
-                  disabled: false,
+                  disabled: awr.isClicked,
                 }
-              : { ...awr, disabled: true };
+              : { ...awr, disabled: !awr.isClicked };
           }),
           trivia: question.trivia,
         };
       })
     );
   }
-  console.log("Main data: ", questions);
+
+  React.useEffect(() => {
+    setResult(questions);
+  }, [questions]);
 
   return (
     <main className="container center-flex">
@@ -94,11 +84,16 @@ export default function App() {
         <HomePage handleClick={() => SetQuizStart((prevState) => !prevState)} />
       ) : (
         <div className="questions-container">
-          <Question
-            handleClickAnswer={handleClickAnswer}
-            trivia={questions[0].trivia}
-            answers={questions[0].answers}
-          />
+          {questions.map((question) => {
+            return (
+              <Question
+                key={nanoid()}
+                handleClickAnswer={handleClickAnswer}
+                trivia={question.trivia}
+                answers={question.answers}
+              />
+            );
+          })}
 
           <button className="check-answer-btn">Check answers</button>
         </div>

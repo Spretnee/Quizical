@@ -99,6 +99,9 @@ body {
   padding: 4px 8px;
   margin: 0 0.9em 0.9em 0;
 }
+.answer:disabled {
+  opacity: 0.7;
+}
 .question h2 {
   margin-bottom: 0.8em;
 }
@@ -124,5 +127,9 @@ body {
   background: #d6dbf5;
 }
 .correct-answer {
+  background: #94d7a2;
+}
+
+.clicked-wrong-answer {
   background: #f8bcbc;
 }

@@ -3,8 +3,9 @@ import Answer from "./Answer";
 
 export default function Question(props) {
   // console.log("Props from Question component", props);
-  const isAlreadyClicked = props.answers.every((answer) => !answer.isClicked);
-  // console.log(isAlreadyClicked);
+
+  const isAlreadyClicked = props.answers.every((answer) => !answer.isClicked); // checks if at least on answer is clicked//
+
   const answersElement = props.answers.map((item, index) => {
     return (
       <Answer

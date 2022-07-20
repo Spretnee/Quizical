@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 export default function App() {
   const [questions, setQuestions] = React.useState(null);
   const [quizStart, SetQuizStart] = React.useState(false);
-  const [result, setResult] = React.useState(questions);
+  const [showResult, setShowResult] = React.useState(false);
 
   React.useEffect(() => {
     async function fetchTrivia() {
@@ -72,10 +72,6 @@ export default function App() {
     );
   }
 
-  React.useEffect(() => {
-    setResult(questions);
-  }, [questions]);
-
   return (
     <main className="container center-flex">
       <Background />
@@ -91,11 +87,17 @@ export default function App() {
                 handleClickAnswer={handleClickAnswer}
                 trivia={question.trivia}
                 answers={question.answers}
+                showResult={showResult}
               />
             );
           })}
 
-          <button className="check-answer-btn">Check answers</button>
+          <button
+            onClick={() => setShowResult((prevState) => !prevState)}
+            className="check-answer-btn"
+          >
+            Check answers
+          </button>
         </div>
       )}
     </main>

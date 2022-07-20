@@ -2,7 +2,7 @@ import React from "react";
 import Answer from "./Answer";
 
 export default function Question(props) {
-  // console.log("Props from Question component", props);
+  console.log("Props from Question component", props);
 
   const isAlreadyClicked = props.answers.every((answer) => !answer.isClicked); // checks if at least on answer is clicked//
 
@@ -16,6 +16,7 @@ export default function Question(props) {
         text={item.answer}
         id={item.id}
         disabled={!isAlreadyClicked && item.disabled}
+        showResult={props.showResult}
       />
     );
   });

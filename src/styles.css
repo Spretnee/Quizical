@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Karla", sans-serif;
+}
+/* TYPOGRAPHY */
+.home-page {
+  text-align: center;
+}
+.home-page h1 {
+  font-weight: 700;
+  font-size: 31.25px;
+  line-height: 37px;
+  color: #293264;
+  margin-bottom: 0.4em;
+}
+
+.home-page p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #293264;
+  margin-bottom: 2em;
+}
+.home-page button {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #f5f7fb;
+}
+.question h2 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #293264;
+}
+.answer {
+  font-family: "Karla", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  color: #293264;
+}
+.check-answer-btn {
+  font-weight: 600;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  color: #f5f7fb;
+}
+
+/* LAYOUT */
+body {
+  height: 100vh;
+  background: #e5e5e5;
+}
+.center-flex {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  position: relative;
+  background: #f5f7fb;
+  width: 550px;
+  min-height: 550px;
+  padding: 2em 3em;
+}
+.upper-right-blob {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+.lower-left-blob {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+}
+.home-page button {
+  border: none;
+  width: 193px;
+  height: 52px;
+  background: #4d5b9e;
+  border-radius: 15px;
+}
+.home-page button:focus {
+  box-shadow: inset 0px 0px 13px 6px rgba(255, 255, 255, 0.35);
+}
+
+.answer {
+  min-width: 65px;
+  border: 0.794239px solid #4d5b9e;
+  border-radius: 7.94239px;
+  padding: 4px 8px;
+  margin: 0 0.9em 0.9em 0;
+}
+.question h2 {
+  margin-bottom: 0.8em;
+}
+.questions-container {
+  display: flex;
+  flex-direction: column;
+}
+.question {
+  border-bottom: 0.794239px solid #dbdef0;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  z-index: 500;
+}
+.check-answer-btn {
+  background: #4d5b9e;
+  border-radius: 10px;
+  width: 120px;
+  height: 35px;
+  align-self: center;
+  border: none;
+}
+.clicked {
+  background: #d6dbf5;
+}
+.correct-answer {
+  background: #f8bcbc;
+}

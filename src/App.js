@@ -11,6 +11,7 @@ export default function App() {
   const [quizStart, SetQuizStart] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
   const [countCorrect, setCountCorrect] = React.useState(0);
+  const [reset, setReset] = React.useState(false);
 
   React.useEffect(() => {
     async function fetchTrivia() {
@@ -51,15 +52,15 @@ export default function App() {
       return refactoredData;
     }
     fetchTrivia().then((data) => setQuestions(data));
-  }, []);
+  }, [reset]);
 
   const areAllClicked =
     questions !== null
       ? questions.some((question) => {
           return question.answers.every((answer) => !answer.isClicked);
         })
-      : true;
-  console.log(questions);
+      : "kurac";
+
   function handleClickAnswer(id, e) {
     setQuestions((prevQuestions) =>
       prevQuestions.map((question) => {
@@ -85,14 +86,11 @@ export default function App() {
         };
       })
     );
-
-    // console.log(questions);
-    // console.log(countCorrect);
-    console.log(showResult);
   }
   function countCorrectAnswer(isCorrect, e) {
     setCountCorrect((prevCount) => (isCorrect ? prevCount + 1 : prevCount));
   }
+  console.log(questions === null);
   return (
     <main className="container center-flex">
       <Background />
@@ -132,7 +130,11 @@ export default function App() {
               You scored {countCorrect}/5 correct answers
             </p>
             <button
-              onClick={() => setShowResult((prevState) => !prevState)}
+              onClick={() => {
+                setReset((prevState) => !prevState);
+                setShowResult((prevState) => !prevState);
+                setCountCorrect(0);
+              }}
               className="check-answer-btn"
             >
               Play again

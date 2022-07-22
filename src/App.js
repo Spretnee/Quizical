@@ -3,12 +3,14 @@ import HomePage from "./components/HomePage";
 import Question from "./components/Question";
 import Background from "./components/Background";
 import shuffleArray from "./utils/shuffleArray";
+
 import { nanoid } from "nanoid";
 
 export default function App() {
   const [questions, setQuestions] = React.useState(null);
   const [quizStart, SetQuizStart] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
+  const [countCorrect, setCountCorrect] = React.useState(0);
 
   React.useEffect(() => {
     async function fetchTrivia() {
@@ -51,6 +53,13 @@ export default function App() {
     fetchTrivia().then((data) => setQuestions(data));
   }, []);
 
+  const areAllClicked =
+    questions !== null
+      ? questions.some((question) => {
+          return question.answers.every((answer) => !answer.isClicked);
+        })
+      : true;
+  console.log(questions);
   function handleClickAnswer(id, e) {
     setQuestions((prevQuestions) =>
       prevQuestions.map((question) => {
@@ -64,20 +73,35 @@ export default function App() {
                   isCorrect: awr.isCorrect,
                   disabled: awr.isClicked,
                 }
-              : { ...awr, disabled: !awr.isClicked };
+              : {
+                  answer: awr.answer,
+                  id: awr.id,
+                  isClicked: awr.isClicked,
+                  isCorrect: awr.isCorrect,
+                  disabled: !awr.isClicked,
+                };
           }),
           trivia: question.trivia,
         };
       })
     );
-  }
 
+    // console.log(questions);
+    // console.log(countCorrect);
+    console.log(showResult);
+  }
+  function countCorrectAnswer(isCorrect, e) {
+    setCountCorrect((prevCount) => (isCorrect ? prevCount + 1 : prevCount));
+  }
   return (
     <main className="container center-flex">
       <Background />
 
       {!quizStart ? (
-        <HomePage handleClick={() => SetQuizStart((prevState) => !prevState)} />
+        <HomePage
+          disabled={questions === null}
+          handleClick={() => SetQuizStart((prevState) => !prevState)}
+        />
       ) : (
         <div className="questions-container">
           {questions.map((question) => {
@@ -88,16 +112,32 @@ export default function App() {
                 trivia={question.trivia}
                 answers={question.answers}
                 showResult={showResult}
+                countCorrectAnswer={countCorrectAnswer}
               />
             );
           })}
 
           <button
+            disabled={areAllClicked}
             onClick={() => setShowResult((prevState) => !prevState)}
-            className="check-answer-btn"
+            className={
+              !showResult ? "check-answer-btn" : "check-answer-btn-hidden"
+            }
           >
             Check answers
           </button>
+
+          <div className={!showResult ? "finished-hidden" : "finished-shown"}>
+            <p className="count-correct">
+              You scored {countCorrect}/5 correct answers
+            </p>
+            <button
+              onClick={() => setShowResult((prevState) => !prevState)}
+              className="check-answer-btn"
+            >
+              Play again
+            </button>
+          </div>
         </div>
       )}
     </main>

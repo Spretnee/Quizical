@@ -123,6 +123,16 @@ body {
   align-self: center;
   border: none;
 }
+.check-answer-btn-hidden {
+  background: #4d5b9e;
+  border-radius: 10px;
+  width: 120px;
+  height: 35px;
+  align-self: center;
+  border: none;
+  display: none;
+}
+
 .clicked {
   background: #d6dbf5;
 }
@@ -132,4 +142,16 @@ body {
 
 .clicked-wrong-answer {
   background: #f8bcbc;
+}
+.finished-hidden {
+  display: none;
+  justify-content: space-between;
+  padding: 0 4em;
+  z-index: 100;
+}
+.finished-shown {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4em;
+  z-index: 100;
 }

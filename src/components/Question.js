@@ -2,9 +2,10 @@ import React from "react";
 import Answer from "./Answer";
 
 export default function Question(props) {
-  console.log("Props from Question component", props);
+  // console.log("Props from Question component", props);
 
-  const isAlreadyClicked = props.answers.every((answer) => !answer.isClicked); // checks if at least on answer is clicked//
+  const isAlreadyClicked = props.answers.every((answer) => !answer.isClicked); // checks if at least one answer is clicked//
+  // console.log(isAlreadyClicked);
 
   const answersElement = props.answers.map((item, index) => {
     return (
@@ -17,6 +18,9 @@ export default function Question(props) {
         id={item.id}
         disabled={!isAlreadyClicked && item.disabled}
         showResult={props.showResult}
+        countCorrectAnswer={(e, isCorrect) =>
+          props.countCorrectAnswer(e, isCorrect)
+        }
       />
     );
   });

@@ -11,11 +11,13 @@ export default function Answer(props) {
   const displayResults = props.showResult
     ? hiddenResultsStyle
     : clickedAnswersStyle;
+
   return (
     <button
       disabled={props.disabled}
       onClick={(e) => {
         props.handleClick(props.id, e);
+        props.countCorrectAnswer(props.isCorrect, e);
       }}
       className={displayResults}
     >
